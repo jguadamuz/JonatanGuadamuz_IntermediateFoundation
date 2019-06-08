@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Foundation</title>
+</head>
+
+<body>
+    <script>
+
+        /*function to print in the html page the results of the 
+          calculations.
+          will print the result of fun(arg1, arg2)
+          */
+        function printToPage(message, fun, arg1, arg2) {
+            const div = document.createElement("div");
+            const tempOutput = fun(arg1, arg2);
+
+            // So we can handle functions that ouput Array or Number in the html
+            if (Array.isArray(tempOutput)) {
+                tempOuput = tempOutput.join(", ");
+            }
+            div.innerHTML = `<h3>${message}:</h3><p>${tempOutput}</p>`;
+            document.body.appendChild(div);
+        }
+
+        /*
+        Sigma - Implement function sigma(num) that, given a number, 
+        returns the sum of all positive integers up to the given number (inclusive)
+        Ex: sigma(3) = 6 (or 1+2+3); sigma(5) = 15 (or 1+2+3+4+5)
+        */
+        function sigma(num) {
+            let sum = 0;
+            for (let i = 1; i <= num; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+        printToPage("Sigma(3)", sigma, 3);
+        printToPage("Sigma(100)", sigma, 100);
+        printToPage("Sigma(5)", sigma, 5);
+
+        /*
+        Factorial - Write a function factorial(num) that, given a number,
+        returns the product (multiplication) of all positive integers 
+        from 1 up to the given number (inclusive).
+        Ex: factorial(3) = 6 (or 1*2*3); factorial(5) = 120 (or 1*2*3*4*5).
+        */
+        function factorial(num) {
+            let result = 1;
+            for (let i = 2; i <= num; i++) {
+                result *= i;
+            }
+            return result;
+        }
+        printToPage("factorial(3)", factorial, 3);
+        printToPage("factorial(5)", factorial, 5);
+
+        /*
+        Fibonacci - Create a function to generate Fibonacci numbers.
+        Each number is the sum of the previous two, starting with values 0 and 1.
+        Your function should accept one argument, an index into the sequence 
+        (where 0 corresponds to the initial value, 4 corresponds to the value four later, etc)
+        Examples: fibonacci(0) = 0 (given), fibonacci(1) = 1 (given), 
+                  fibonacci(2) = 1 (fib(0)+fib(1), or 0+1), 
+                  fibonacci(3) = 2 (fib(1) + fib(2)3, or 1+1), 
+                  fibonacci(4) = 3 (1+2), fibonacci(5) = 5 (2+3), 
+                  fibonacci(6) = 8 (3+5), fibonacci(7) = 13 (5+8)
+        */
+        function fibonacci(num) {
+            let result = [];
+            if (num === 0 || num === 1) {
+                return num;
+            }
+            result.push(0);
+            result.push(1);
+            for (let i = 2; i <= num; i++) {
+                result.push(result[i - 1] + result[i - 2]);
+            }
+            return result[num];
+        }
+        printToPage("fibonacci(0)", fibonacci, 0);
+        printToPage("fibonacci(1)", fibonacci, 1);
+        printToPage("fibonacci(2)", fibonacci, 2);
+        printToPage("fibonacci(3)", fibonacci, 3);
+        printToPage("fibonacci(4)", fibonacci, 4);
+        printToPage("fibonacci(5)", fibonacci, 5);
+        printToPage("fibonacci(6)", fibonacci, 6);
+        printToPage("fibonacci(7)", fibonacci, 7);
+        printToPage("fibonacci(8)", fibonacci, 8);
+
+        /*
+        Array: Second-to-Last: Return the second-to-last element of an array. Given [42, true, 4, "Liam", 7], return "Liam".  If array is too short, return null.
+        */
+        function secondToLast(array) {
+            if (array.length < 2) {
+                return null;
+            }
+            return array[array.length - 2];
+        }
+        printToPage("secondToLast([42, true, 4, \"Liam\", 7])",
+            secondToLast, [42, true, 4, "Liam", 7]);
+
+        /*
+        Array: Nth-to-Last: Return the element that is N-from-array's-end.
+        Given ([5,2,3,6,4,9,7],3), return 4.  If the array is too short, return null.
+        */
+        function nthToLast(array, num) {
+            if (array.length < num) {
+                return null;
+            }
+            return array[array.length - num];
+        }
+        printToPage("nthToLast([42, true, 4, \"Liam\", 7], 4)", nthToLast, [42, true, 4, "Liam", 7], 4);
+        printToPage("nthToLast([5,2,3,6,\"Jona\",9,7], 3)", nthToLast, [5, 2, 3, 6, "Jona", 9, 7], 3);
+
+        /*
+        Array: Second-Largest: Return the second-largest element of an array. 
+        Given [42,1,4,3.14,7], return 7. If the array is too short, return null.
+        */
+        function secondLargest(array) {
+            // if there are not enough elements, then return null
+            if (array.length < 2) {
+                return null;
+            }
+            let largest = Number.MIN_VALUE;
+            let secLargest = Number.MIN_VALUE;
+
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i];
+                if (element > largest) {
+                    secLargest = largest;
+                    largest = element;
+                } else if (element > secLargest) {
+                    secLargest = element;
+                }
+            }
+            return secLargest;
+        }
+        printToPage("secondLargest([42,1,4,3.14,7])", secondLargest, [42, 1, 4, 3.14, 7]);
+        printToPage("secondLargest([42,1,41,314,7])", secondLargest, [42, 1, 41, 314, 7]);
+        printToPage("secondLargest([2,1,41,3.14,7])", secondLargest, [2, 1, 41, 3.14, 7]);
+        printToPage("secondLargest([4,69,4,3.14,70])", secondLargest, [4, 69, 4, 3.14, 70]);
+        printToPage("secondLargest([42])", secondLargest, [42]);
+        printToPage("secondLargest([42,1])", secondLargest, [42, 1]);
+        printToPage("secondLargest([1, 50])", secondLargest, [1, 50]);
+
+        /*
+        Double Trouble: Create a function that changes a given array to 
+        list each existing element twice, retaining original order
+        Convert [4, "Ulysses", 42, false] to [4,4, "Ulysses", "Ulysses", 42, 42, false, false].
+        */
+        function doubleTrouble(array) {
+            let result = [];
+            array.forEach(elem => {
+                result.push(elem);
+                result.push(elem);
+            });
+            return result;
+        }
+        printToPage("doubleTrouble([4, \"Ulysses\", 42, false])",
+            doubleTrouble, [4, "Ulysses", 42, false]);
+
+    </script>
+    <style>
+        body {
+            width: 60%;
+            margin-left: 10%;
+        }
+
+        div {
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(23, 62, 189);
+            /* word-wrap: break-word; */
+            overflow-wrap: break-word;
+            text-align: justify;
+        }
+    </style>
+
+</body>
+
+</html>
