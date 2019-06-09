@@ -163,6 +163,24 @@
         printToPage("doubleTrouble([4, \"Ulysses\", 42, false])",
             doubleTrouble, [4, "Ulysses", 42, false]);
 
+        // Part 2
+        function fibonacciRecursive(num) {
+            if (num == 0 || num == 1) {
+                return num;
+            }
+            return fibonacciRecursive(num - 1) + fibonacciRecursive(num - 2);
+        }
+        printToPage("fibonacciRecursive(0)", fibonacciRecursive, 0);
+        printToPage("fibonacciRecursive(1)", fibonacciRecursive, 1);
+        printToPage("fibonacciRecursive(2)", fibonacciRecursive, 2);
+        printToPage("fibonacciRecursive(3)", fibonacciRecursive, 3);
+        printToPage("fibonacciRecursive(4)", fibonacciRecursive, 4);
+        printToPage("fibonacciRecursive(5)", fibonacciRecursive, 5);
+        printToPage("fibonacciRecursive(6)", fibonacciRecursive, 6);
+        printToPage("fibonacciRecursive(7)", fibonacciRecursive, 7);
+        printToPage("fibonacciRecursive(8)", fibonacciRecursive, 8);
+
+
     </script>
     <style>
         body {
